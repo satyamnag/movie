@@ -1,0 +1,55 @@
+{% extends 'app_movie/base.html' %}
+<body>
+    {% block body %}
+    <div class="container" style="text-align: center;">
+        <h1><b>{{ object.movie_name }}</b></h1>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <img src="{{movie.movie_poster}}" alt="movie poster" width="500px" style="border:3px solid gray; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+            </div>
+            <div class="col">
+                <h5 style="padding-top: 10px;"><b>Category: </b>{{ object.movie_category }}</h5>
+                <h5 style="padding-top: 10px;"><b>Release Year: </b>{{ object.movie_releaseyear }}</h5>
+                <h5 style="padding-top: 10px;"><b>Certification: </b>{{ object.movie_certificate }}</h5>
+                <h5 style="padding-top: 10px;"><b>Duration: </b>{{ object.movie_duration }} minutes</h5>
+                <h5 style="padding-top: 10px;"><b>Rating: </b>{{ object.movie_rating }}/10</h5>
+                <h5 style="padding-top: 10px;"><b>Review: </b>{{ object.movie_review }} million</h5>
+                <h5 style="padding-top: 10px;"><b>Budget: </b>${{ object.movie_budget }}</h5>
+                <h5 style="padding-top: 10px;"><b>Box Office: </b>${{ object.movie_boxoffice }}</h5>
+                <h5 style="padding-top: 10px; text-align: justify;"><b>Tag Line: </b>{{ object.movie_tagline }}</h5>
+                <h5 style="padding-top: 10px; text-align: justify;"><b>Description: </b>{{ object.movie_description }}</h5>
+                <h5 style="padding-top: 10px;"><b>Director: </b>{{ object.movie_director }}</h5>
+                <h5 style="padding-top: 10px;"><b>Writer/s: </b>{{ object.movie_writers }}</h5>
+                <h5 style="padding-top: 10px; text-align: justify;"><b>Star/s: </b>{{ object.movie_stars }}</h5>
+                <br>
+                <div class="container">
+                    <div class="row">
+                        {% if user.is_authenticated %}
+                        <div class="col">
+                            <a href="{% url 'update' movie.id %}" class="btn btn-outline-success"><b>Update</b></a>
+                        </div>
+                        <div class="col">
+                            <a href="{% url 'delete' movie.id %}" class="btn btn-outline-danger"><b>Delete</b></a>
+                        </div>
+                        <div class="col">
+                            <a href="{% url 'index' %}" class="btn btn-outline-primary"><b>Back</b></a>
+                        </div>
+                        {% else %}
+                        <div class="col">
+                            <a href="{% url 'index' %}" class="btn btn-outline-primary"><b>Back</b></a>
+                        </div>
+                        {% endif %}
+                        <div class="col"></div>
+                        <div class="col"></div>
+                        <div class="col"></div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>

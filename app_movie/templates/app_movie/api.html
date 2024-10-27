@@ -1,0 +1,70 @@
+{% extends 'app_movie/base.html' %}
+<body>
+    {% block body %}
+    <div class="container" style="text-align: center; display: flex;">
+        <h5 style="padding-right: 20px;">Category-wise Movies: </h5>
+        <button style="margin-right: 10px;" class="btn btn-secondary" id="AllMovies">All</button>
+        <button style="margin-right: 10px;" class="btn btn-secondary" id="ActionMovies">Action</button>
+        <button style="margin-right: 10px;" class="btn btn-secondary" id="DramaMovies">Drama</button>
+        <button style="margin-right: 10px;" class="btn btn-secondary" id="CrimeMovies">Crime</button>
+        <button style="margin-right: 10px;" class="btn btn-secondary" id="BiographyMovies">Biography</button>
+        <button style="margin-right: 10px;" class="btn btn-secondary" id="HistoryMovies">History</button>
+        <button style="margin-right: 10px;" class="btn btn-secondary" id="AdventureMovies">Adventure</button>
+        <button style="margin-right: 10px;" class="btn btn-secondary" id="WesternMovies">Western</button>
+    </div>
+    <br>
+    <div class="container" style="text-align: center; display: flex;">
+        <h5 style="padding-right: 20px;">Certification-wise Movies: </h5>
+        <button style="margin-right: 10px;" class="btn btn-secondary" id="RCertifiedMovies">R</button>
+        <button style="margin-right: 10px;" class="btn btn-secondary" id="PG13CertifiedMoviies">PG-13</button>
+        <button style="margin-right: 10px;" class="btn btn-secondary" id="ApprovedCertifiedMovies">Approved</button>
+    </div>
+    <script>
+        const baseURL=window.Location.origin;
+
+        document.getElementById('AllMovies').addEventListener('click', function() {
+            window.location.href='/movies/';
+        });
+
+        document.getElementById('ActionMovies').addEventListener('click', function() {
+            window.location.href='/action_movies/';
+        });
+
+        document.getElementById('DramaMovies').addEventListener('click', function() {
+            window.location.href='/drama_movies/';
+        });
+
+        document.getElementById('CrimeMovies').addEventListener('click', function() {
+            window.location.href='/crime_movies/';
+        });
+
+        document.getElementById('BiographyMovies').addEventListener('click', function() {
+            window.location.href='/biography_movies/';
+        });
+
+        document.getElementById('HistoryMovies').addEventListener('click', function() {
+            window.location.href='/history_movies';
+        });
+
+        document.getElementById('AdventureMovies').addEventListener('click', function() {
+            window.location.href='/adventure_movies/';
+        });
+
+        document.getElementById('WesternMovies').addEventListener('click', function() {
+            window.location.href='/western_movies/';
+        });
+
+        document.getElementById('RCertifiedMovies').addEventListener('click', function() {
+            window.location.href='/r_certified_movies/';
+        });
+
+        document.getElementById('PG13CertifiedMoviies').addEventListener('click', function() {
+            window.location.href='/pg13_certified_movies/';
+        });
+
+        document.getElementById('ApprovedCertifiedMovies').addEventListener('click', function() {
+            window.location.href='/approved_certified_movies/';
+        });
+    </script>
+    {% endblock %}
+</body>

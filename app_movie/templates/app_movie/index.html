@@ -1,0 +1,91 @@
+{% extends 'app_movie/base.html' %}
+<body>
+    <div class="container">
+        {% block content %}
+        {% for message in messages %}
+        <div class="message {{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endblock %}
+        {% block body %}
+    </div>
+    <div class="container">
+        <form class="form-inline my-2 my-lg-0 d-flex" method="GET" style="margin-left: 70%;">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search by Movie name" aria-label="Search" name="movie_name" style="margin-right: 5px;">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+    <br>
+    <div class="container">
+        <h3 style="text-align: center;">Your Ultimate Movie Guide: Discover, Watch, and Unleash the Magic of Cinema!</h3>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for movie in movie_list %}
+            <div class="col-md-6">
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <a href="{% url 'detail' movie.id %}"><img src="{{ movie.movie_poster }}" alt="movie_poster" height="320px" width="245px" style="border: 3px solid gray; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"></a>
+                    </div>
+                    <div class="col">
+                        <div style="display: flex; font-weight: bold;">
+                            <h5 style="margin-right: 20px;"><b>{{ forloop.counter }}.</b></h5>
+                            <a href="{% url 'detail' movie.id %}">
+                                <h5><b>{{ movie.movie_name }}</b></h5>
+                            </a>
+                        </div>
+                        <br>
+                        <h5><b>Category: </b>{{ movie.movie_category }}</h5>
+                        <h5><b>Release Year: </b>{{ movie.movie_releaseyear }}</h5>
+                        <h5><b>Certification: </b>{{ movie.movie_certificate }}</h5>
+                        <h5><b>Duration: </b>{{ movie.movie_duration }} minutes</h5>
+                        <h5><b>Rating: </b>{{ movie.movie_rating }}/10</h5>
+                        <h5><b>Review: </b>{{ movie.movie_review }} million</h5>
+                        <h6>Posted by: {{ movie.user_name }}</h6>
+                        <br>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'detail' movie.id %}" class="btn btn-outline-primary"><b>Details</b></a>
+                        <a href="{% url 'update' movie.id %}" class="btn btn-outline-success"><b>Update</b></a>
+                        <a href="{% url 'delete' movie.id %}" class="btn btn-outline-danger"><b>Delete</b></a>
+                        {% else %}
+                        <a href="{% url 'detail' movie.id %}" class="btn btn-outline-primary"><b>Details</b></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:2 and not forloop.last %}
+            <div class="row"></div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <br>
+        {% if is_paginated %}
+        <nav aria-level="page navigation">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a href="?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+                {% for page_num in page_obj.paginator.page_range %}
+                <li class="page-item {% if page_obj.number == page_num %}active{% endif %}">
+                    <a href="?page={{ page_num }}" class="page-link">{{ page_num }}</a>
+                </li>
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a href="?page={{ page_obj.next_page_number }}" class="page-link" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+    {% endblock %}
+</body>

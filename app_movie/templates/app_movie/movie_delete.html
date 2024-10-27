@@ -1,0 +1,13 @@
+{% extends 'app_movie/base.html' %}
+<body>
+    {% block body %}
+    <div class="container" style="background-color: #e3f2fd;">
+        <form method="POST" style="text-align: center;">
+            {% csrf_token %}
+            <h2>Are you sure you want to delete the movie: '{{ movie.movie_name }}'</h2>
+            <br>
+            <button type="submit" class="btn btn-danger">Confirm</button>
+        </form>
+    </div>
+    {% endblock %}
+</body>
